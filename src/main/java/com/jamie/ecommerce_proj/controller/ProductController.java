@@ -1,15 +1,31 @@
 package com.jamie.ecommerce_proj.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.jamie.ecommerce_proj.model.Product;
+import com.jamie.ecommerce_proj.service.ProductService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/")
 public class ProductController {
 
-    @RequestMapping("products")
-    public String greet(){
-        return "Hello World";
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
+
+    @GetMapping("products")
+    public List<Product> getProducts(){
+        return productService.getProducts();
+    }
+
+    @PostMapping("products")
+    public Product addProduct(@RequestBody Product product){
+        return productService.addProduct(product);
+    }
+
 
 }
