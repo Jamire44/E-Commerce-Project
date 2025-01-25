@@ -89,4 +89,11 @@ public class ProductController {
             return new ResponseEntity<>("Not Deleted", HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("products/search")
+    public ResponseEntity<List<Product>> searchProduct(@RequestParam String keyword){
+        List<Product> keywordProduct = productService.searchProductsByKeyword(keyword);
+        return new ResponseEntity<>(keywordProduct, HttpStatus.OK);
+    }
+
 }
