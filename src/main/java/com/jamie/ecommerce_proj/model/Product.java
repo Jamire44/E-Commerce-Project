@@ -1,32 +1,12 @@
 package com.jamie.ecommerce_proj.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 public class Product {
-
-    public Product(long id, String name, String description, String brand, BigDecimal price, String category, Date releaseDate, boolean available, int quantity) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.brand = brand;
-        this.price = price;
-        this.category = category;
-        this.releaseDate = releaseDate;
-        this.available = available;
-        this.quantity = quantity;
-    }
-
-    public Product() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +17,30 @@ public class Product {
     private BigDecimal price;
     private String category;
     private Date releaseDate;
-    private boolean available;
-    private int quantity;
+    private boolean productAvailable;
+    private int stockQuantity;
+
+    private String imageName;
+    private String imageType;
+    @Lob
+    private byte[] imageDate;
+
+    public Product(long id, String name, String description, String brand, BigDecimal price, String category, Date releaseDate, boolean productAvailable, int stockQuantity, String imageName, String imageType, byte[] imageDate) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.brand = brand;
+        this.price = price;
+        this.category = category;
+        this.releaseDate = releaseDate;
+        this.productAvailable = productAvailable;
+        this.stockQuantity = stockQuantity;
+        this.imageName = imageName;
+        this.imageType = imageType;
+        this.imageDate = imageDate;
+    }
+
+    public Product() {}
 
     public long getId() {
         return id;
@@ -96,19 +98,43 @@ public class Product {
         this.releaseDate = releaseDate;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public boolean isProductAvailable() {
+        return productAvailable;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void setProductAvailable(boolean productAvailable) {
+        this.productAvailable = productAvailable;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getStockQuantity() {
+        return stockQuantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
+
+    public byte[] getImageDate() {
+        return imageDate;
+    }
+
+    public void setImageDate(byte[] imageDate) {
+        this.imageDate = imageDate;
     }
 }
